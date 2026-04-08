@@ -1,0 +1,5 @@
+"0","# Calculating mean bill length for ""Adelie"" and islands using dplyr - but these means are not being stored, just for illustration"
+"0","data %>%"
+"0","  filter(species == ""Adelie"") %>%"
+"0","  group_by(island) %>%"
+"0","  summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))"

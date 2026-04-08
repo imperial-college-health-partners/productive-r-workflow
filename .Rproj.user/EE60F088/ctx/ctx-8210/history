@@ -1,0 +1,311 @@
+?install.packages
+v<-character(5)
+v
+length(v)
+v<-character()
+v
+length(v)
+library(dplyr)
+v<-character(5)
+as.data.frame(v)
+as.data.frame(v)%>%count()
+v<-rep(NA,5)
+v
+as.data.frame(v)%>%count()
+v<-rep(as.character(NA),5)
+as.data.frame(v)%>%count()
+v
+v<-rep("NA",5)
+as.data.frame(v)%>%count()
+v
+v<-rep(NA_character_,5)
+v
+as.data.frame(v)%>%count()
+typeof(v_
+typeof(v)
+v<-c(rep(NA_character_,5),"E","N","E","E")
+v
+as.data.frame(v)%>%count()
+as.data.frame(v)%>%count(v)
+v%>%count(v)
+as.data.frame(v)%>%count(v)
+v<-c(rep(NA,5),"E","N","E","E")
+as.data.frame(v)%>%count(v)
+v<-rep(NA,5)
+as.data.frame(v)%>%count(v)
+typeof(v)
+v<-c(rep(NA,5),"E")
+typeof(v)
+as.data.frame(v)%>%count(v)
+?interval
+?difftime
+?time_length
+q()
+?prop.table
+?writeDoc
+??writeDoc
+?select
+?table
+?summary_factorlist
+??summary_factorlist
+?factor
+?mutate
+q()
+styler:::style_active_file()
+styler:::style_active_file()
+styler:::style_active_file()
+getwd()
+# Set working directory
+setwd("~/Personal/Training/Productive R Workflow 2026/productive-r-workflow")
+getwd()
+# Read data using readr
+data <- readr::read_csv("input/data.csv")
+getwd()
+# Read data using readr
+data <- readr::read_csv("input/data.csv")
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+# Set working directory
+# setwd("~/Personal/Training/Productive R Workflow 2026/productive-r-workflow") # Not needed anymore after transforming folder into a Project
+# Read data using readr
+data <- readr::read_csv("input/data.csv")
+# Summary
+summary(data)
+# Calculating mean bill length for "Adelie" and islands using dplyr - but these means are not being stored, just for illustration
+data %>%
+filter(species == "Adelie") %>%
+group_by(island) %>%
+summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+# Plot using ggplot2
+data %>%
+na.omit() %>%
+ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) +
+geom_point() +
+labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Penguin Bill Dimensions") +
+scale_shape_manual(values = c("Adelie" = 16, "Chinstrap" = 17, "Gentoo" = 18))
+rm(data)
+dim(data)
+# Read data using readr
+#data <- readr::read_csv("input/data.csv")
+# Read data using read_excel
+data <- read_excel("input/data.xlsx", na = "NA")
+library(readxl)
+# Read data using readr
+#data <- readr::read_csv("input/data.csv")
+# Read data using read_excel
+data <- read_excel("input/data.xlsx", na = "NA")
+View(data)
+View(data)
+calc_mean_bill <- function(island_name) {
+filtered_data <- subset(na.omit(data), species == "Adelie" & island == island_name)
+mean_bill_length <- mean(filtered_data$bill_length_mm)
+return(round(mean_bill_length, 2))
+}
+# Call the function for each island
+calc_mean_bill("Torgersen")
+calc_mean_bill("Biscoe")
+calc_mean_bill("Dream")
+# plot function
+create_scatterplot <- function(data, selected_species, selected_island) {
+# Filter the data for the specified species and island
+filtered_data <- data %>%
+na.omit() %>%
+filter(species == selected_species, island == selected_island)
+# Create the scatterplot
+plot <- ggplot(
+filtered_data,
+aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)
+) +
+geom_point() +
+labs(
+x = "Bill Length (mm)",
+y = "Bill Depth (mm)",
+title = paste("Penguin Bill Dimensions -", selected_species, "-", selected_island)
+)
+return(plot)
+}
+# Use the function
+create_scatterplot(data, "Adelie", "Torgersen")
+styler:::style_active_file()
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+# Set working directory
+# setwd("~/Personal/Training/Productive R Workflow 2026/productive-r-workflow") # Not needed anymore after transforming folder into a Project
+# Source() functions.R
+source(file="R/functions.R")
+# Read data using readr
+# data <- readr::read_csv("input/data.csv")
+### Read data using read_excel ---
+data <- read_excel("input/data.xlsx", na = "NA") # Tell R how missing values are represented in the XLSX spreadsheet
+# Summary
+summary(data)
+# Calculating mean bill length for "Adelie" and islands using dplyr - but these means are not being stored, just for illustration
+data %>%
+filter(species == "Adelie") %>%
+group_by(island) %>%
+summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+### Plot using ggplot2 ---
+data %>%
+na.omit() %>%
+ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) +
+geom_point() +
+labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Penguin Bill Dimensions") +
+scale_shape_manual(values = c("Adelie" = 16, "Chinstrap" = 17, "Gentoo" = 18))
+### Call CALC_MEAN_BILL function 3 times, once for each island ---
+calc_mean_bill("Torgersen")
+calc_mean_bill("Biscoe")
+calc_mean_bill("Dream")
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+create_scatterplot(data, "Adelie", "Torgersen")
+install.packages("rmarkdown")
+getwd()
+source(file="~R/functions.R")
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+source(file=".R/functions.R")
+getwd()
+source(file="functions.R")
+# Read data using read_excel
+data <- read_excel("..input/data.xlsx", na = "NA")
+# Read data using read_excel
+data <- read_excel("../input/data.xlsx", na = "NA")
+# Tell R how missing values are represented in the XLSX spreadsheet
+# Summary
+summary(data)
+# Calculating mean bill length for "Adelie" and islands using dplyr - but these means are not being stored, just for illustration
+data %>%
+filter(species == "Adelie") %>%
+group_by(island) %>%
+summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+### Plot using ggplot2 ---
+data %>%
+na.omit() %>%
+ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) +
+geom_point() +
+labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Penguin Bill Dimensions") +
+scale_shape_manual(values = c("Adelie" = 16, "Chinstrap" = 17, "Gentoo" = 18))
+### Call CALC_MEAN_BILL function 3 times, once for each island ---
+calc_mean_bill("Torgersen")
+calc_mean_bill("Biscoe")
+calc_mean_bill("Dream")
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+create_scatterplot(data, "Adelie", "Torgersen")
+# Read data using read_excel
+data <- read_excel("../input/data.xlsx", na = "NA")
+# Tell R how missing values are represented in the XLSX spreadsheet
+# Summary
+summary(data)
+# Calculating mean bill length for "Adelie" and islands using dplyr - but these means are not being stored, just for illustration
+data %>%
+filter(species == "Adelie") %>%
+group_by(island) %>%
+summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+### Plot using ggplot2 ---
+data %>%
+na.omit() %>%
+ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) +
+geom_point() +
+labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Penguin Bill Dimensions") +
+scale_shape_manual(values = c("Adelie" = 16, "Chinstrap" = 17, "Gentoo" = 18))
+### Call CALC_MEAN_BILL function 3 times, once for each island ---
+calc_mean_bill("Torgersen")
+calc_mean_bill("Biscoe")
+calc_mean_bill("Dream")
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+create_scatterplot(data, "Adelie", "Torgersen")
+View(data)
+View(data)
+library(ggplot2)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+# Calculating mean bill length for "Adelie" and islands using dplyr - but these means are not being stored, just for illustration
+data %>%
+filter(species == "Adelie") %>%
+group_by(island) %>%
+summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+### Plot using ggplot2 ---
+data %>%
+na.omit() %>%
+ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) +
+geom_point() +
+labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Penguin Bill Dimensions") +
+scale_shape_manual(values = c("Adelie" = 16, "Chinstrap" = 17, "Gentoo" = 18))
+### Call CALC_MEAN_BILL function 3 times, once for each island ---
+calc_mean_bill("Torgersen")
+calc_mean_bill("Biscoe")
+calc_mean_bill("Dream")
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+create_scatterplot(data, "Adelie", "Torgersen")
+# Read data using read_excel
+data <- read_excel("../input/data.xlsx", na = "NA")
+# Tell R how missing values are represented in the XLSX spreadsheet
+![]("\assets\culmen_depth.png"){fig-alt="How bill lenght and depth are measured" fig-align="center" width=300}
+# Read data using read_excel
+data <- read_excel("../input/data.xlsx", na = "NA")
+# Tell R how missing values are represented in the XLSX spreadsheet
+![](assets/culmen_depth.png){fig-alt="How bill lenght and depth are measured" fig-align="center" width=300}
+# Read data using read_excel
+data <- read_excel("../input/data.xlsx", na = "NA")
+# Tell R how missing values are represented in the XLSX spreadsheet
+![How bill lenght and depth are measured](assets/culmen_depth.png){fig-align="center" width=300}
+# Calculating mean bill length for "Adelie" and islands using dplyr - but these means are not being stored, just for illustration
+data %>%
+filter(species == "Adelie") %>%
+group_by(island) %>%
+summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+# Use the layout-ncol to create a 2 columns layout. Compute the average bill length per species and display the result on the
+# left. Do the same for the average bill depth on the right.
+#| layout-ncol: 2
+data %>%
+group_by(species) %>%
+summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+data %>%
+filter(species == "Adelie") %>%
+group_by(island) %>%
+summarize(mean_bill_depth = num(mean(bill_depth_mm, na.rm = TRUE), digits = 2))
+### Plot using ggplot2 ---
+data %>%
+na.omit() %>%
+ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) +
+geom_point() +
+labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Penguin Bill Dimensions") +
+scale_shape_manual(values = c("Adelie" = 16, "Chinstrap" = 17, "Gentoo" = 18))
+### Call CALC_MEAN_BILL function 3 times, once for each island ---
+calc_mean_bill("Torgersen")
+calc_mean_bill("Biscoe")
+calc_mean_bill("Dream")
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+create_scatterplot(data, "Adelie", "Torgersen")
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+p1 <- create_scatterplot(data, "Adelie", ) # data, species, island
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+p1 <- create_scatterplot(data, "Adelie", "#6689c6") # data, species, island
+p2 <- create_scatterplot(data, "Chinstrap", "#e85252") # data, species, island
+p3 <- create_scatterplot(data, "Gentoo", "#9a6fb0") # data, species, island
+p1 + p2 + p3
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+p1 <- create_scatterplot(data, "Adelie", "#6689c6") # data, species, island
+p2 <- create_scatterplot(data, "Chinstrap", "#e85252") # data, species, island
+p3 <- create_scatterplot(data, "Gentoo", "#9a6fb0") # data, species, island
+#p1 + p2 + p3
+View(data)
+View(data)
+View(data)
+View(data)
+install.packages("plotly")
+install.packages("DT")

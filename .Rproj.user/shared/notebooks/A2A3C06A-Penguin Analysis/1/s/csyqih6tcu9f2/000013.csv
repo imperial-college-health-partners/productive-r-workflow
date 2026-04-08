@@ -1,0 +1,4 @@
+"0","data %>%"
+"0","  filter(species == ""Adelie"") %>%"
+"0","  group_by(island) %>%"
+"0","  summarize(mean_bill_depth = num(mean(bill_depth_mm, na.rm = TRUE), digits = 2))"

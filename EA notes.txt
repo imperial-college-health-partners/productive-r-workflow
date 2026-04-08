@@ -1,0 +1,51 @@
+--------------------------------------------
+--     Productive R Workflow Webpage      --
+https://www.productive-r-workflow.com/login
+--------------------------------------------
+
+
+-- Best finds --
+Yan Holtz's The R Graph Gallery
+https://r-graph-gallery.com/
+
+From Data to Viz:
+https://www.data-to-viz.com/
+
+Data Viz Inspiration:
+https://www.dataviz-inspiration.com/
+
+
+Holtz's Productive R Workflow Solutions
+https://github.com/holtzy/productive-r-workflow-homework-solution/tree/main
+
+Yan's Quarto Tips & Tricks
+https://www.productive-r-workflow.com/quarto-tricks
+
+
+readxl to read xls or xlsx spreadsheets (tidyverse package)
+https://readxl.tidyverse.org/
+
+Pro tip: you can press Alt + Shift + K to show all the R Studio shortcuts.
+
+How to cite R and R packages
+https://ropensci.org/blog/2021/11/16/how-to-cite-r-and-r-packages/
+
+R for Data Science by H Wickham, M C-R and G G : in particular, the function chapter 
+https://r4ds.hadley.nz/
+
+Tidyverse style guide:
+https://style.tidyverse.org/
+
+Jenny Bryan's Project-oriented workflow
+https://tidyverse.org/blog/2017/12/workflow-vs-script/
+
+Markdown Cheat Sheet
+https://opensource.com/sites/default/files/gated-content/markdown_cheat_sheet_opensource.com_.pdf
+
+Allison Horst's Data Science Art
+https://allisonhorst.com/data-science-art
+
+## File paths - reminder:
+"/" root of the current drive
+"./" current directory
+"../" parent of the current directory

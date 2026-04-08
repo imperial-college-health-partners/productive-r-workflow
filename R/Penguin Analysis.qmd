@@ -1,0 +1,151 @@
+---
+title: "Penguin Analysis"
+subtitle: "From 'Module 3 Report header' in productive-r-workflow.com/"
+description: "This document demonstrates the capabilities of Quarto and CSS styling."
+
+author:
+  name: "Elisa Allen"
+  affiliation: "Imperial College Health Partners"
+  email: elisa.allen@imperialcollegehealthpartners.com
+  
+keywords: "Quarto, CSS styling, data analysis"
+date: today
+
+title-block-banner: "#f0f3f5" # Background colour for the title block
+title-block-banner-color: "black"  # Font colour for the title block (if not "black", it makes it "white" which doesn't look right)
+
+fig-cap-location: margin
+number-sections: true
+
+format: 
+  html:
+    toc: true
+    code-fold: true # collapse code chunks by default
+    code-summary: "Show the code"
+css: style.css
+editor: source
+---
+
+## Introduction
+
+Load libraries
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+library(patchwork)
+library(plotly)
+library(DT)
+library(knitr)
+```
+
+::: callout-important
+Remember: to give credit to packages use the `citation()` function.
+:::
+
+Source functions.R
+
+```{r}
+source(file = "functions.R")
+```
+
+Apply dataviz theme
+
+```{r}
+theme_set(create_dataviz_theme()) # Dataviz theme
+```
+
+## Data loading
+
+The dataset penguins is available online [here](https://allisonhorst.github.io/palmerpenguins/).
+
+```{r}
+# Read data using read_excel
+data <- read_excel("../input/data.xlsx", na = "NA")
+# Tell R how missing values are represented in the XLSX spreadsheet
+```
+
+![How bill lenght and depth are measured](assets/culmen_depth.png){fig-align="center" width="300"}
+
+Display the penguin dataset using the `DT` package.
+
+```{r}
+datatable(data, filter = "top")
+```
+
+Summarise the dataset.
+
+```{r}
+# Summary
+summary(data)
+```
+
+## Descriptive analytics
+
+Average bill length for **Adelie** penguins.
+
+```{r, fig.width=6, fig.height=6, fig.align='center'}
+# Calculating mean bill length for "Adelie" and islands using dplyr - but these means are not being stored, just for illustration
+avg_bill_length_Adelie <- data %>%
+  filter(species == "Adelie") %>%
+  group_by(island) %>%
+  summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))
+
+kable(avg_bill_length_Adelie)
+```
+
+Use the `layout-ncol` to create a 2 column layout.
+
+```{r}
+#| layout-ncol: 2
+
+data %>%
+  group_by(species) %>%
+  summarize(average_bill_length = num(mean(bill_length_mm, na.rm = TRUE)))
+
+data %>%
+  group_by(species) %>%
+  summarize(average_bill_depth = num(mean(bill_depth_mm, na.rm = TRUE)))
+```
+
+```{r}
+### Plot using ggplot2 ---
+p <- data %>%
+  na.omit() %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) +
+  geom_point() +
+  labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Penguin Bill Dimensions") +
+  scale_shape_manual(values = c("Adelie" = 16, "Chinstrap" = 17, "Gentoo" = 18))
+
+ggplotly(p)
+
+### Call CALC_MEAN_BILL function 3 times, once for each island for species="Adelie"
+avg_Torgersen <- calc_mean_bill("Torgersen")
+avg_Biscoe <- calc_mean_bill("Biscoe")
+avg_Dream <- calc_mean_bill("Dream")
+```
+
+The average bill length for Adelie penguins from **Torgersen island** is `r avg_Torgersen`, calculated as $\frac{1}{n}\sum_{i=1}^{n}x_i$, where $x_i$ is the bill length for the $i$ penguin in the group.
+
+The average bill length for Adelie penguins from **Biscoe island** is `r avg_Biscoe`.
+
+The average bill length for Adelie penguins from **Dream island** is `r avg_Dream`.
+
+Use `patchwork` to make 3 side-by-side scatterplots using the `create_scatterplot()` function.
+
+```{r}
+### Call CREATE_SCATTERPLOT function to shows the relationship between bill length and bill depth with a scatterplot ---
+p1 <- create_scatterplot(data, "Adelie", ) # data, species, island
+p2 <- create_scatterplot(data, "Chinstrap", ) # data, species, island
+p3 <- create_scatterplot(data, "Gentoo", ) # data, species, island
+
+p1 + p2 + p3
+```
+
+::: callout-important
+The `create_scatterplot` function automatically assigns the color to each `species`.
+
+To manuallly specify the color, use `scale_color_manual(values = c("Adelie" = "#FF8C00", "Chinstrap" = "#9932CC", "Gentoo" = "#008B8B"))` after `geom_point()`.
+:::

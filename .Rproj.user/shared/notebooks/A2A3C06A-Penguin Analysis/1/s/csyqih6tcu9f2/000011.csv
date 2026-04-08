@@ -1,0 +1,7 @@
+"0",""
+"0","# Use the layout-ncol to create a 2 columns layout. Compute the average bill length per species and display the result on the "
+"0","# left. Do the same for the average bill depth on the right."
+"0","#| layout-ncol: 2"
+"0","data %>%"
+"0","  group_by(species) %>%"
+"0","  summarize(mean_bill_length = num(mean(bill_length_mm, na.rm = TRUE), digits = 2))"
