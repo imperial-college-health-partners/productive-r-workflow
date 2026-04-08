@@ -1,14 +1,14 @@
 ---
 title: "Penguin Analysis"
 subtitle: "From 'Module 3 Report header' in productive-r-workflow.com/"
-description: "This document demonstrates the capabilities of Quarto and CSS styling."
+description: "This document demonstrates the capabilities of Quarto, CSS styling and GitHub."
 
 author:
   name: "Elisa Allen"
   affiliation: "Imperial College Health Partners"
   email: elisa.allen@imperialcollegehealthpartners.com
   
-keywords: "Quarto, CSS styling, data analysis"
+keywords: "Quarto, CSS styling, data analysis, GitHub"
 date: today
 
 title-block-banner: "#f0f3f5" # Background colour for the title block
